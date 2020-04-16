@@ -1,17 +1,35 @@
 package com.hypatech.service
 
 import com.hypatech.domain.Todo
+import com.hypatech.interfaces.ITodo
 import grails.gorm.services.Service
+import grails.gorm.transactions.Transactional
 import groovy.transform.CompileStatic
 
 @Service(Todo)
-@CompileStatic
-interface TodoService {
-    Todo get(Serializable id)
+abstract class TodoService implements ITodo {
 
-    List<Todo> list(Map args)
+    @Override
+    @Transactional
+    List<Todo> findAllByIsCompleted(boolean isCompleted) {
+        def todos = Todo.where { isCompleted == isCompleted}
+        def results  = todos.list {
+            order ('title', 'desc')
+        }
+        return results
+    }
 
-    Long count()
+    @Override
+    @Transactional
+    Todo update(Long id, Todo todo){
+        def thisTodo = Todo.findById(id)
 
-    Todo save(Todo todo)
+        thisTodo.title = todo.title
+        thisTodo.description = todo.description
+        thisTodo.isCompleted = todo.isCompleted
+        thisTodo.branch = todo.branch
+
+        thisTodo.save(flush: true)
+    }
+
 }

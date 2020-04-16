@@ -1,7 +1,5 @@
 package com.hypatech.domain
-
 import grails.gorm.annotation.Entity
-import org.hibernate.dialect.Dialect
 
 @Entity
 class Todo {
@@ -10,9 +8,11 @@ class Todo {
     String description
     Boolean isCompleted = false
 
+    static belongsTo = [branch: Branch]
+
     static constraints = {
         id unique: true
-        title nullable: false
+        title nullable: false, unique: true
         description nullable: false
         isCompleted nullable: false
     }
@@ -20,5 +20,6 @@ class Todo {
     static mapping = {
         autoTimeStamp true
         table "todo"
+        branch lazy: false
     }
 }
