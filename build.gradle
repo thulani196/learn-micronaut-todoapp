@@ -4,8 +4,6 @@ plugins {
     id "application"
 }
 
-
-
 version "0.1"
 group "com.hypatech"
 
@@ -20,6 +18,11 @@ configurations {
 }
 
 dependencies {
+
+    //tag::lombok
+    compileOnly "org.projectlombok:lombok:1.18.12"
+    annotationProcessor "org.projectlombok:lombok:1.18.12"
+    //end::lombok
     //  Custom libraries
     implementation "io.micronaut:micronaut-security-jwt"
 
