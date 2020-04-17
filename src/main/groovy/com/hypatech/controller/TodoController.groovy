@@ -2,6 +2,7 @@ package com.hypatech.controller
 
 import com.hypatech.domain.Todo
 import com.hypatech.service.TodoService
+import groovy.transform.CompileStatic
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.Body
 import io.micronaut.http.annotation.Controller
@@ -9,9 +10,11 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.http.annotation.Put
 import io.micronaut.http.hateoas.JsonError
+import io.micronaut.security.annotation.Secured
 import io.reactivex.Single
 import javax.inject.Inject
 
+@Secured("isAuthenticated()")
 @Controller("/todo")
 class TodoController {
 

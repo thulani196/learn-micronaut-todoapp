@@ -14,7 +14,7 @@ abstract class TodoService implements ITodo {
     List<Todo> findAllByIsCompleted(boolean isCompleted) {
         def todos = Todo.where { isCompleted == isCompleted}
         def results  = todos.list {
-            order ('title', 'desc')
+            order ('title', 'asc')
         }
         return results
     }

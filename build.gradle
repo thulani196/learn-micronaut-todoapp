@@ -21,6 +21,8 @@ configurations {
 
 dependencies {
     //  Custom libraries
+    implementation "io.micronaut:micronaut-security-jwt"
+
     annotationProcessor 'io.micronaut.data:micronaut-data-processor:1.0.0.M1'
     compile 'io.micronaut.data:micronaut-data-jdbc:1.0.0.M1'
     runtime 'com.h2database:h2'
